@@ -1,0 +1,10 @@
+{
+    "watch": [
+        "src"
+    ],
+    "ext": "js json",
+    "ignore": [
+        "logs/*"
+    ],
+    "exec": "node src/bot.js"
+}

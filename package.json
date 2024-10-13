@@ -1,15 +1,21 @@
 {
   "name": "tele-bot",
   "version": "1.0.0",
-  "description": "",
-  "main": "bot.js",
+  "description": "A Telegram bot auto-reply using Node.js",
+  "main": "src/bot.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "NODE_TLS_REJECT_UNAUTHORIZED=0 NODE_OPTIONS='--dns-result-order=ipv4first' node src/bot.js",
+    "dev": "NODE_TLS_REJECT_UNAUTHORIZED=0 NODE_OPTIONS='--dns-result-order=ipv4first' nodemon src/bot.js"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "dotenv": "^16.4.5",
+    "lodash": "^4.17.21",
     "node-telegram-bot-api": "^0.66.0"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.7"
   }
 }

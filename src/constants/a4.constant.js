@@ -1,54 +1,3 @@
-const TelegramBot = require('node-telegram-bot-api');
-// import { A4 } from 'constants'
-
-// Replace YOUR_TOKEN with your actual bot token from BotFather
-const token = '8157988126:AAGM6JlMSp9klY2uf3hPa4c6WuislHOjZpI';
-
-// Create a bot that uses 'polling' to fetch new updates
-const bot = new TelegramBot(token, { polling: true });
-
-// Handle '/start' command
-bot.onText(/\/chichang/, (msg) => {
-    const chatId = msg.chat.id;
-    bot.sendMessage(chatId, 'Kêu chụy mài cái giề?? Coi trừng kao!!');
-});
-
-bot.onText(/\/morningmood/, (msg) => {
-    const chatId = msg.chat.id;
-    bot.sendMessage(chatId, 'Nothing good :(((');
-});
-
-bot.onText(/\/fack/, (msg) => {
-    const chatId = msg.chat.id;
-    bot.sendMessage(chatId, 'GIÀ - NGHÈO - ĐÓI');
-});
-
-// Handle '/help' command
-bot.onText(/\/a4/, (msg) => {
-    const chatId = msg.chat.id;
-    const max = 25;
-    const index = Math.floor(Math.random() * max);
-    bot.sendMessage(chatId, A4[index]);
-});
-
-// Handle other messages (auto-reply)
-bot.on('message', (msg) => {
-    const chatId = msg.chat.id;
-    const userMessage = msg.text;
-
-    // Ignore commands to avoid duplicate responses
-    if (userMessage.startsWith('/')) return;
-
-    // Example auto-reply logic
-    const changLe = ['trang', 'chang', 'c chang', 'c trang', 'chị trang', 'chị chang', 'bà chang']
-    const isExistChang = changLe.some((msg)=> userMessage.toLowerCase().includes(msg))
-    if (isExistChang) {
-        bot.sendMessage(chatId, 'Kêu chụy mài cái giề??');
-    }
-    return;
-});
-
-
 const A4 = [
     "Đôi khi, sự mệt mỏi và chán nản đến từ việc bạn đã mất đi đam mê trong công việc. Hãy dành thời gian để suy nghĩ lại về lý do bạn chọn công việc này ban đầu và những điều bạn yêu thích ở nó.",
     "Trước khi nghỉ việc, hãy xác định rõ lý do khiến bạn không hài lòng. Đó có phải là lương bổng, môi trường làm việc, mối quan hệ với đồng nghiệp hay sự phát triển nghề nghiệp? Biết được nguyên nhân giúp bạn quyết định đúng hơn.",
@@ -75,5 +24,8 @@ const A4 = [
     "Thay vì nghỉ việc ngay lập tức, bạn có thể cân nhắc tìm kiếm cơ hội mới trong khi vẫn giữ công việc hiện tại. Điều này giúp bạn có thời gian và sự ổn định tài chính để tìm kiếm lựa chọn tốt hơn.",
     "Hãy nhìn xa hơn công việc hiện tại và tập trung vào mục tiêu dài hạn của bạn. Công việc hiện tại có thể chỉ là một bước đệm để bạn tiến xa hơn trong sự nghiệp.",
     "Nếu bạn đã thử mọi cách nhưng vẫn không thấy phù hợp, việc thay đổi lĩnh vực làm việc có thể là một hướng đi mới. Điều này đòi hỏi sự can đảm nhưng cũng có thể mở ra nhiều cơ hội thú vị."
-  ];
-  
+];
+
+module.exports = {
+    A4
+}
