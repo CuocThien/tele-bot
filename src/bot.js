@@ -39,14 +39,39 @@ bot.onText(/\/a4/, (msg) => {
     bot.sendMessage(chatId, A4.A4[index]);
 });
 
+// bot.onText(/\/vesom/, (msg) => {
+//     if (_.isEmpty(msg)) return;
+//     const chatId = msg.chat.id;
+//     const arrMsg = msg.text.split(' ');
+//     if((Number(arrMsg[1 ]))){
+//         bot.sendMessage(chatId, `Ngồi im đó thêm ${arrMsg[1]} phút đi con!! Muốn cũng không có được về sớm đâu!!!`);
+//     }
+//     return;
+// });
 bot.onText(/\/vesom/, (msg) => {
     if (_.isEmpty(msg)) return;
     const chatId = msg.chat.id;
     const arrMsg = msg.text.split(' ');
-    if((Number(arrMsg[1 ]))){
-        bot.sendMessage(chatId, `Ngồi im đó thêm ${arrMsg[1]} phút đi con!! Muốn cũng không có được về sớm đâu!!!`);
+
+    // Extract the part after the command
+    const expression = arrMsg.slice(1).join(' ');
+
+    try {
+        // Evaluate the expression
+        const result = eval(expression);
+
+        // Check if the result is a valid number
+        if (!isNaN(result)) {
+            if (result > 0) {
+                return bot.sendMessage(chatId, `Ngồi im đó thêm ${result} phút đi con!! Muốn cũng không có được về sớm đâu!!!`);
+            }
+            returnbot.sendMessage(chatId, `Hết giờ thì xách cái đuýt về lẹ đi còn ngồi đó gõ gõ con khỉ! Đóng máy liền!!`);
+        } else {
+            return bot.sendMessage(chatId, "Gõ khùng điên gì đó? Quánh chetme bây giờ!! Koi trừng kao!!!");
+        }
+    } catch (error) {
+        return bot.sendMessage(chatId, "Gõ khùng điên gì đó? Quánh chetme bây giờ!! Koi trừng kao!!!");
     }
-    return;
 });
 // Handle other messages (auto-reply)
 bot.on('message', (msg) => {
