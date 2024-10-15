@@ -51,27 +51,31 @@ bot.onText(/\/a4/, (msg) => {
 bot.onText(/\/vesom/, (msg) => {
     if (_.isEmpty(msg)) return;
     const chatId = msg.chat.id;
-    const arrMsg = msg.text.split(' ');
+    // Use a regular expression to find the command and extract the expression
+    const match = msg.text.match(/\/vesom\s*([\d+\-*/\s]+)/);
+    const errorMsg = "Gõ khùng điên gì đó? Quánh chetme bây giờ!! Koi trừng kao!!!";
+    if (match && match[1]) {
+        const expression = match[1].trim();
 
-    // Extract the part after the command
-    const expression = arrMsg.slice(1).join(' ');
+        try {
+            // Evaluate the expression
+            const result = eval(expression);
 
-    try {
-        // Evaluate the expression
-        const result = eval(expression);
-
-        // Check if the result is a valid number
-        if (!isNaN(result)) {
-            if (result > 0) {
-                return bot.sendMessage(chatId, `Ngồi im đó thêm ${result} phút đi con!! Muốn cũng không có được về sớm đâu!!!`);
+            // Check if the result is a valid number
+            if (!isNaN(result)) {
+                if (result > 0) {
+                    return bot.sendMessage(chatId, `Ngồi im đó thêm ${result} phút đi con!! Muốn cũng không có được về sớm đâu!!!`);
+                }
+                return bot.sendMessage(chatId, `Hết giờ thì xách cái đuýt về lẹ đi còn ngồi đó gõ gõ con khỉ! Đóng máy liền!!`);
+            } else {
+                return bot.sendMessage(chatId, errorMsg);
             }
-            return bot.sendMessage(chatId, `Hết giờ thì xách cái đuýt về lẹ đi còn ngồi đó gõ gõ con khỉ! Đóng máy liền!!`);
-        } else {
-            return bot.sendMessage(chatId, "Gõ khùng điên gì đó? Quánh chetme bây giờ!! Koi trừng kao!!!");
+        } catch (error) {
+            return bot.sendMessage(chatId, errorMsg);
         }
-    } catch (error) {
-        return bot.sendMessage(chatId, "Gõ khùng điên gì đó? Quánh chetme bây giờ!! Koi trừng kao!!!");
-    }
+    } else {
+        return bot.sendMessage(chatId, errorMsg);
+    };
 });
 // Handle other messages (auto-reply)
 bot.on('message', (msg) => {
