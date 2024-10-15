@@ -65,7 +65,7 @@ bot.onText(/\/vesom/, (msg) => {
             if (result > 0) {
                 return bot.sendMessage(chatId, `Ngồi im đó thêm ${result} phút đi con!! Muốn cũng không có được về sớm đâu!!!`);
             }
-            returnbot.sendMessage(chatId, `Hết giờ thì xách cái đuýt về lẹ đi còn ngồi đó gõ gõ con khỉ! Đóng máy liền!!`);
+            return bot.sendMessage(chatId, `Hết giờ thì xách cái đuýt về lẹ đi còn ngồi đó gõ gõ con khỉ! Đóng máy liền!!`);
         } else {
             return bot.sendMessage(chatId, "Gõ khùng điên gì đó? Quánh chetme bây giờ!! Koi trừng kao!!!");
         }
