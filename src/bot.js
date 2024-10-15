@@ -39,6 +39,15 @@ bot.onText(/\/a4/, (msg) => {
     bot.sendMessage(chatId, A4.A4[index]);
 });
 
+bot.onText(/\/vesom/, (msg) => {
+    if (_.isEmpty(msg)) return;
+    const chatId = msg.chat.id;
+    const arrMsg = msg.text.split(' ');
+    if((Number(arrMsg[1 ]))){
+        bot.sendMessage(chatId, `Ngồi im đó thêm ${arrMsg[1]} phút đi con!! Muốn cũng không có được về sớm đâu!!!`);
+    }
+    return;
+});
 // Handle other messages (auto-reply)
 bot.on('message', (msg) => {
     if (_.isEmpty(msg)) return;
