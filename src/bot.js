@@ -98,3 +98,33 @@ bot.on('message', (msg) => {
     }
     return;
 });
+
+bot.onText(/\/demnguoc/, (msg) => {
+    if (_.isEmpty(msg)) return;
+    const chatId = msg.chat.id;
+    
+    const currentTime = new Date();
+    const startWorkTime = new Date();
+    startWorkTime.setHours(8, 0, 0, 0);
+    const endTime = new Date();
+    endTime.setHours(17, 30, 0, 0);
+
+    if(currentTime.getTime() < startWorkTime.getTime()) {
+        bot.sendMessage(chatId, 'Chưa tới giờ làm mà đòi về rồi!!');
+        bot.sendSticker(chatId, STICKER.LIEC_LIEC);
+        return;
+    }
+    if (currentTime.getTime() > endTime.getTime()) {
+        bot.sendMessage(chatId, 'Dề đi má!! Còn đếm ngược cái gì nữa!!');
+        bot.sendSticker(chatId, STICKER.LIEC_LIEC);
+        return;
+    }
+
+    const remainingMilliseconds = endTime.getTime() - currentTime.getTime();
+    const remainingMinutes = Math.ceil(remainingMilliseconds / (1000 * 60));
+    if (remainingMinutes > 0) {
+        bot.sendMessage(chatId, `Còn ${remainingMinutes} phút nữa là được về! Cố lên!`);
+        bot.sendSticker(chatId, STICKER.VUA_CODE_VUA_KHOC);
+    }
+    return;
+});
