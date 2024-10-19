@@ -2,8 +2,10 @@ const TelegramBot = require('node-telegram-bot-api');
 const { A4, STICKER } = require('./constants');
 const dotenv = require('dotenv');
 const _ = require('lodash');
+const moment = require('moment');
 
 dotenv.config();
+const isWeekend = (date = moment()) => [0,6].includes(date.weekday());
 
 // Replace YOUR_TOKEN with your actual bot token from BotFather
 const token = process.env.TELEGRAM_BOT_TOKEN;
@@ -109,8 +111,14 @@ bot.onText(/\/demnguoc/, (msg) => {
     const endTime = new Date();
     endTime.setHours(17, 30, 0, 0);
 
-    if(currentTime.getTime() < startWorkTime.getTime()) {
-        bot.sendMessage(chatId, 'Chưa tới giờ làm mà đòi về rồi!!');
+    if (isWeekend(moment(currentTime))) {  
+        bot.sendMessage(chatId, 'Thứ 7, chủ nhật làm lụng cái giề!!!');
+        bot.sendSticker(chatId, STICKER.LIEC_LIEC);
+        return;
+    }
+
+    if (currentTime.getTime() < startWorkTime.getTime()) {
+        bot.sendMessage(chatId, 'Chưa tới giờ làm mà đòi về rồi!!!');
         bot.sendSticker(chatId, STICKER.LIEC_LIEC);
         return;
     }
