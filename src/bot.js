@@ -130,8 +130,12 @@ bot.onText(/\/demnguoc/, (msg) => {
 
     const remainingMilliseconds = endTime.getTime() - currentTime.getTime();
     const remainingMinutes = Math.ceil(remainingMilliseconds / (1000 * 60));
-    if (remainingMinutes > 0) {
+    if (remainingMinutes > 30) {
         bot.sendMessage(chatId, `Còn ${remainingMinutes} phút nữa là được về! Cố lên!`);
+        bot.sendSticker(chatId, STICKER.VUA_CODE_VUA_KHOC);
+    }
+    if (remainingMinutes <= 30 && remainingMinutes > 0) {
+        bot.sendMessage(chatId, `Bạn đã có một ngày vất vả cống hiến cho tư bản, hãy thư giãn trong ${remainingMinutes} phút còn lại`);
         bot.sendSticker(chatId, STICKER.VUA_CODE_VUA_KHOC);
     }
     return;
