@@ -41,7 +41,7 @@ bot.onText(/\/fack/, (msg) => {
 bot.onText(/\/a4/, (msg) => {
     if (_.isEmpty(msg)) return;
     const chatId = msg.chat.id;
-    const max = 25;
+    const max = 195;
     const index = Math.floor(Math.random() * max);
     metrics.incrementCommandCount(chatId, 'a4');
     bot.sendMessage(chatId, A4.A4[index]);
